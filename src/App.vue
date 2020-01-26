@@ -12,6 +12,12 @@ import Navbar from '@/components/Navbar'
 export default {
   components: {
     Navbar
+  },
+  metaInfo: {
+    link: [{
+      rel: 'stylesheet',
+      href: 'https://cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css'
+    }]
   }
 }
 </script>
