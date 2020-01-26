@@ -1,15 +1,18 @@
 <template>
   <div class="calendar">
-    <CalendarControls @monthChange="handleMonthChange" />
+    <calendar-controls @monthChange="handleMonthChange" />
     <header class="calendar-title">{{ monthName }}</header>
     <div class="grid-container">
       <div class="calendar-header">
         <div v-for="dayOfWeek in weekDays" :key="dayOfWeek">{{ dayOfWeek }}</div>
       </div>
       <div v-for="week in calendar" :key="week[0].week()" class="calendar-week">
-        <div v-for="day in week" :key="day.format('DD-MM')" class="calendar-cell">
-          {{ day.format('DD') }}
-        </div>
+        <calendar-cell
+          v-for="day in week"
+          :key="`${monthName}-${day.format('DD-MM')}`"
+          :date="day"
+          :month="monthDate"
+        />
       </div>
     </div>
   </div>
@@ -18,8 +21,12 @@
 <script>
 import * as moment from 'moment'
 import CalendarControls from './CalendarControls.vue'
+import CalendarCell from './CalendarCell.vue'
 export default {
-  components: { CalendarControls },
+  components: {
+    CalendarControls,
+    CalendarCell
+  },
   data () {
     return {
       monthDate: new Date(),
@@ -34,9 +41,8 @@ export default {
       // TODO Bug detected for november of 2019
       let startWeek = moment(this.monthDate).startOf('month').week()
       let endWeek = moment(this.monthDate).endOf('month').week()
-      // managin edge case for december where the last week is the number 1
+      // managin edge case for December where the last week is also the number 1
       endWeek = endWeek !== 1 ? endWeek : startWeek + 4
-      console.log(startWeek, endWeek)
       let calendar = []
       for (let week = startWeek; week <= endWeek; week++) {
         calendar.push(Array(7).fill(null).map((_, dayIndex) =>
@@ -75,14 +81,6 @@ export default {
   color whitesmoke
   font-weight bold
   padding 3px
-.calendar-cell
-  display inline-block
-  border: 1px solid #969696
-  width 13vw
-  height 9vw
-  padding 0 4px
-  font-weight bold
-  &:first-child, &:last-child
-    background-color #F2F2F2
-    color #3C6FA2
+.calendar-week
+  display flex
 </style>
