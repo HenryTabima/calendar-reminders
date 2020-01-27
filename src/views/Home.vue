@@ -11,6 +11,9 @@ export default {
   name: 'home',
   components: {
     Calendar
+  },
+  async beforeMount () {
+    await this.$store.dispatch('entities/reminders/fetchAll')
   }
 }
 </script>

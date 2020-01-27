@@ -12,47 +12,10 @@ import * as moment from 'moment'
 import Reminder from './Reminder.vue'
 export default {
   components: { Reminder },
-  props: ['date', 'month'],
+  props: ['date', 'month', 'reminders'],
   data () {
     return {
-      outOfMonth: moment(this.month).format('MMMM') !== this.date.format('MMMM'),
-      reminders: [
-        {
-          id: 1,
-          text: 'Hello world',
-          datetime: moment(),
-          city: 'San Francisco',
-          color: '#6A041D'
-        },
-        {
-          id: 2,
-          text: 'Hello world',
-          datetime: moment(),
-          city: 'San Francisco',
-          color: '#5F9FB9'
-        },
-        {
-          id: 3,
-          text: 'Hello world',
-          datetime: moment(),
-          city: 'San Francisco',
-          color: '#F25F5C'
-        },
-        {
-          id: 4,
-          text: 'Hello world',
-          datetime: moment(),
-          city: 'San Francisco',
-          color: '#FFE066'
-        },
-        {
-          id: 5,
-          text: 'Hello world',
-          datetime: moment(),
-          city: 'San Francisco',
-          color: '#70C1B3'
-        }
-      ]
+      outOfMonth: moment(this.month).format('MMMM') !== this.date.format('MMMM')
     }
   }
 }

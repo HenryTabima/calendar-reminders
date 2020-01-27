@@ -12,6 +12,7 @@
           :key="`${monthName}-${day.format('DD-MM')}`"
           :date="day"
           :month="monthDate"
+          :reminders="$store.getters['entities/reminders/filterDay'](day)"
         />
       </div>
     </div>
@@ -22,6 +23,7 @@
 import * as moment from 'moment'
 import CalendarControls from './CalendarControls.vue'
 import CalendarCell from './CalendarCell.vue'
+
 export default {
   components: {
     CalendarControls,

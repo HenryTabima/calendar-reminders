@@ -1,13 +1,19 @@
 <template>
   <div class="reminder-item" :style="{ 'background-color': data.color }">
-   <span class="reminder-datetime">{{ data.datetime.format('HH:mm') }}</span>
+   <span class="reminder-datetime">{{ getTime(data.datetime) }}</span>
    <div class="reminder-tes">{{ data.text }}</div>
   </div>
 </template>
 
 <script>
+import * as moment from 'moment'
 export default {
-  props: ['data']
+  props: ['data'],
+  methods: {
+    getTime (datetime) {
+      return moment(datetime).format('HH:MM')
+    }
+  }
 }
 </script>
 
