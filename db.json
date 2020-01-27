@@ -1,0 +1,39 @@
+{
+  "reminder": [
+    {
+      "id": 1,
+      "text": "reminder 1",
+      "datetime": "2020-01-27T11:25:29-05:00",
+      "city": "San Francisco",
+      "color": "#6A041D"
+    },
+    {
+      "id": 2,
+      "text": "reminder 2",
+      "datetime": "2020-01-27T11:22:29-05:00",
+      "city": "San Francisco",
+      "color": "#5F9FB9"
+    },
+    {
+      "id": 3,
+      "text": "reminder 3",
+      "datetime": "2020-01-27T11:32:29-05:00",
+      "city": "San Francisco",
+      "color": "#F25F5C"
+    },
+    {
+      "id": 4,
+      "text": "reminder 4",
+      "datetime": "2020-01-27T11:31:29-05:00",
+      "city": "San Francisco",
+      "color": "#FFE066"
+    },
+    {
+      "id": 5,
+      "text": "reminder 5",
+      "datetime": "2020-01-27T11:30:29-05:00",
+      "city": "San Francisco",
+      "color": "#70C1B3"
+    }
+  ]
+}
