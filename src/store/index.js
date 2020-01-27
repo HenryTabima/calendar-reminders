@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import VuexORM from '@vuex-orm/core'
 import Reminder from '@/models/reminder'
 import reminder from './modules/reminder'
+import root from './root'
 
 Vue.use(Vuex)
 
@@ -12,12 +13,5 @@ database.register(Reminder, reminder)
 
 export default new Vuex.Store({
   plugins: [VuexORM.install(database)],
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  }
+  ...root
 })

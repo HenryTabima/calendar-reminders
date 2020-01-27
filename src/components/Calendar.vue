@@ -1,6 +1,5 @@
 <template>
   <div class="calendar">
-    <calendar-controls @monthChange="handleMonthChange" />
     <header class="calendar-title">{{ monthName }}</header>
     <div class="grid-container">
       <div class="calendar-header">
@@ -21,17 +20,15 @@
 
 <script>
 import * as moment from 'moment'
-import CalendarControls from './CalendarControls.vue'
 import CalendarCell from './CalendarCell.vue'
 
 export default {
   components: {
-    CalendarControls,
     CalendarCell
   },
+  props: ['monthDate'],
   data () {
     return {
-      monthDate: new Date(),
       weekDays: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
     }
   },
@@ -52,11 +49,6 @@ export default {
         ))
       }
       return calendar
-    }
-  },
-  methods: {
-    handleMonthChange (date) {
-      this.monthDate = date
     }
   }
 }

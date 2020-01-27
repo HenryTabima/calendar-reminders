@@ -9,7 +9,7 @@
         @input="handleChange"
       />
       </b-field>
-    <b-button>Add Reminder</b-button>
+    <b-button @click="$emit('addReminderClick')">Add Reminder</b-button>
   </div>
 </template>
 
