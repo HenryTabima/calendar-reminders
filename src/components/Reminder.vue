@@ -1,5 +1,5 @@
 <template>
-  <div class="reminder-item" :style="{ 'background-color': data.color }">
+  <div class="reminder-item" :style="{ 'background-color': data.color }" @click="handleClick">
    <span class="reminder-datetime">{{ getTime(data.datetime) }}</span>
    <div class="reminder-tes">{{ data.text }}</div>
   </div>
@@ -12,6 +12,10 @@ export default {
   methods: {
     getTime (datetime) {
       return moment(datetime).format('HH:MM')
+    },
+    handleClick () {
+      this.$store.commit('entities/reminders/SELECT', this.data.id)
+      this.$store.commit('SHOW_INFO_MODAL')
     }
   }
 }
@@ -19,6 +23,7 @@ export default {
 
 <style lang="stylus">
 .reminder-item
+  cursor pointer
   color whitesmoke
   padding 0 5px
   border-radius 7px

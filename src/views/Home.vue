@@ -12,13 +12,22 @@
       <reminder-form />
     </b-modal>
     <b-modal
-      :active.sync="isEditFormActive"
+      :active="isEditFormActive"
       scroll="keep"
       trap-focus
       has-modal-card
       @close="handleClose"
     >
       <reminder-form :edit="true" />
+    </b-modal>
+    <b-modal
+      :active="isReminderInfoActive"
+      scroll="keep"
+      trap-focus
+      has-modal-card
+      @close="handleClose"
+    >
+      <reminder-info />
     </b-modal>
   </div>
 </template>
@@ -27,6 +36,7 @@
 import CalendarControls from '@/components/CalendarControls.vue'
 import Calendar from '@/components/Calendar.vue'
 import ReminderForm from '@/components/ReminderForm.vue'
+import ReminderInfo from '@/components/ReminderInfo.vue'
 import { mapState } from 'vuex'
 
 export default {
@@ -34,7 +44,8 @@ export default {
   components: {
     CalendarControls,
     Calendar,
-    ReminderForm
+    ReminderForm,
+    ReminderInfo
   },
   async beforeMount () {
     await this.$store.dispatch('entities/reminders/fetchAll')
@@ -44,7 +55,7 @@ export default {
       month: new Date()
     }
   },
-  computed: mapState(['isCreateFormActive', 'isEditFormActive']),
+  computed: mapState(['isCreateFormActive', 'isEditFormActive', 'isReminderInfoActive']),
   methods: {
     handleMonthChange (date) {
       this.month = date

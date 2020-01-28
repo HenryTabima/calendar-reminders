@@ -4,6 +4,9 @@ import * as moment from 'moment'
 import uuid from 'uuid/v1'
 
 const reminderModule = {
+  state: {
+    selectedID: null
+  },
   actions: {
     async fetchAll () {
       const reminders = await reminderService.getAll()
@@ -19,6 +22,11 @@ const reminderModule = {
       Reminder.insert({ data: reminder })
     }
   },
+  mutations: {
+    SELECT (state, id) {
+      state.selectedID = id
+    }
+  },
   getters: {
     filterDay () {
       return day =>
@@ -28,6 +36,9 @@ const reminderModule = {
           return reminderDay === cellDay
         }).orderBy('datetime')
           .get()
+    },
+    selected (state) {
+      return Reminder.find(state.selectedID)
     }
   }
 }

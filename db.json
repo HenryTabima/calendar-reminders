@@ -1,41 +1,6 @@
 {
   "reminder": [
     {
-      "id": "c7bdda10-4162-11ea-9768-3b2a5ca7fb49",
-      "text": "reminder 1",
-      "datetime": "2020-01-27T11:25:29-05:00",
-      "city": "San Francisco",
-      "color": "#6A041D"
-    },
-    {
-      "id": "d58512d0-4162-11ea-a2e1-e71a2b7c4cd6",
-      "text": "reminder 2",
-      "datetime": "2020-01-27T11:22:29-05:00",
-      "city": "San Francisco",
-      "color": "#5F9FB9"
-    },
-    {
-      "id": "dca87750-4162-11ea-a249-9523a5be54f3",
-      "text": "reminder 3",
-      "datetime": "2020-01-27T11:32:29-05:00",
-      "city": "San Francisco",
-      "color": "#F25F5C"
-    },
-    {
-      "id": "e615cbd0-4162-11ea-9549-633c6ce8effa",
-      "text": "reminder 4",
-      "datetime": "2020-01-27T11:31:29-05:00",
-      "city": "San Francisco",
-      "color": "#FFE066"
-    },
-    {
-      "id": "ec003b20-4162-11ea-a249-cd7a84b235e8",
-      "text": "reminder 5",
-      "datetime": "2020-01-27T11:30:29-05:00",
-      "city": "San Francisco",
-      "color": "#70C1B3"
-    },
-    {
       "text": "Test1",
       "city": "Cali",
       "datetime": "2020-01-15T19:49:45-05:00",
@@ -69,6 +34,13 @@
       "datetime": "2020-01-15T20:06:28-05:00",
       "color": "#000",
       "id": "6fd880e0-416a-11ea-903d-416321dfc84a"
+    },
+    {
+      "text": "pasear",
+      "city": "Cali",
+      "datetime": "2020-01-28T10:00:00-05:00",
+      "color": "#E27300",
+      "id": "0f86f3b0-416b-11ea-903d-416321dfc84a"
     }
   ]
 }
