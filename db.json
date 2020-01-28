@@ -1,0 +1,32 @@
+{
+  "reminders": [
+    {
+      "text": "Test1",
+      "city": "Cali",
+      "datetime": "2020-01-15T19:49:45-05:00",
+      "color": "#AB149E",
+      "id": "25085a10-4168-11ea-89a8-1b076a13ec25"
+    },
+    {
+      "text": "Test4",
+      "city": "Cali",
+      "datetime": "2020-01-12T19:57:11-05:00",
+      "color": "#009CE0",
+      "id": "340a6750-4169-11ea-89a8-1b076a13ec25"
+    },
+    {
+      "id": "1f640990-416a-11ea-9f23-7f8720e29d4b",
+      "text": "test5",
+      "datetime": "2020-01-12T10:03:00-05:00",
+      "city": "Cali",
+      "color": "#653294"
+    },
+    {
+      "id": "6fd880e0-416a-11ea-903d-416321dfc84a",
+      "text": "Test3",
+      "datetime": "2020-01-15T20:06:28-05:00",
+      "city": "Cali",
+      "color": "#0C797D"
+    }
+  ]
+}
