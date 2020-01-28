@@ -20,7 +20,7 @@
             <b-field label="DateTime (Read Only)">
               <b-input
                 type="text"
-                :value="form.datetime"
+                :value="form.datetime.toString()"
                 placeholder="DateTime"
                 disabled
               >
@@ -70,6 +70,7 @@
 </template>
 
 <script>
+import uuid from 'uuid/v1'
 import { Compact } from 'vue-color'
 import { required, maxLength } from 'vuelidate/lib/validators'
 export default {
@@ -84,10 +85,25 @@ export default {
     return {
       action: this.edit ? 'Edit' : 'Create',
       form: {
+        id: uuid(),
         text: '',
         city: '',
         datetime: new Date(),
         color: { hex: '#000' }
+      }
+    }
+  },
+  computed: {
+    selectedReminder () {
+      return this.$store.getters['entities/reminders/selected']
+    }
+  },
+  beforeMount () {
+    if (this.edit) {
+      this.form = {
+        ...this.selectedReminder,
+        datetime: new Date(this.selectedReminder.datetime),
+        color: { hex: this.selectedReminder.color }
       }
     }
   },
@@ -106,12 +122,22 @@ export default {
     handleFormAction () {
       this.$v.form.$touch()
       if (!this.$v.form.$invalid) {
-        this.$store.dispatch('entities/reminders/create', this.form)
-        this.$store.commit('CLOSE_MODALS')
+        if (this.edit) {
+          this.handleEdit()
+        } else {
+          this.handleCreate()
+        }
       } else {
         // TODO better handling for invalid forms
         console.log('invalid form')
       }
+      this.$store.commit('CLOSE_MODALS')
+    },
+    handleCreate () {
+      this.$store.dispatch('entities/reminders/create', this.form)
+    },
+    handleEdit () {
+      this.$store.dispatch('entities/reminders/edit', this.form)
     }
   }
 }

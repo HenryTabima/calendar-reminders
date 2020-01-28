@@ -1,18 +1,11 @@
 {
-  "reminder": [
+  "reminders": [
     {
       "text": "Test1",
       "city": "Cali",
       "datetime": "2020-01-15T19:49:45-05:00",
       "color": "#AB149E",
       "id": "25085a10-4168-11ea-89a8-1b076a13ec25"
-    },
-    {
-      "text": "test2",
-      "city": "Cali",
-      "datetime": "2020-01-27T20:50:00-05:00",
-      "color": "#D33115",
-      "id": "34bbf980-4168-11ea-89a8-1b076a13ec25"
     },
     {
       "text": "Test4",
@@ -22,25 +15,18 @@
       "id": "340a6750-4169-11ea-89a8-1b076a13ec25"
     },
     {
+      "id": "1f640990-416a-11ea-9f23-7f8720e29d4b",
       "text": "test5",
-      "city": "Cali",
       "datetime": "2020-01-12T10:03:00-05:00",
-      "color": "#009CE0",
-      "id": "1f640990-416a-11ea-9f23-7f8720e29d4b"
+      "city": "Cali",
+      "color": "#653294"
     },
     {
+      "id": "6fd880e0-416a-11ea-903d-416321dfc84a",
       "text": "Test3",
-      "city": "Cali",
       "datetime": "2020-01-15T20:06:28-05:00",
-      "color": "#000",
-      "id": "6fd880e0-416a-11ea-903d-416321dfc84a"
-    },
-    {
-      "text": "pasear",
       "city": "Cali",
-      "datetime": "2020-01-28T10:00:00-05:00",
-      "color": "#E27300",
-      "id": "0f86f3b0-416b-11ea-903d-416321dfc84a"
+      "color": "#0C797D"
     }
   ]
 }

@@ -14,7 +14,7 @@ export default {
       return moment(datetime).format('HH:MM')
     },
     handleClick () {
-      this.$store.commit('entities/reminders/SELECT', this.data.id)
+      this.$store.commit('entities/reminders/SELECT_REMINDER', this.data.id)
       this.$store.commit('SHOW_INFO_MODAL')
     }
   }

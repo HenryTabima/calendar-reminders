@@ -8,7 +8,7 @@ if (process.env.NODE_ENV === 'production') {
   API_URL = process.env.API_URL || 'http://localhost:3000'
 }
 
-const REMINDERS_URL = API_URL + '/reminder'
+const REMINDERS_URL = API_URL + '/reminders'
 
 export default {
   async getAll () {
@@ -20,6 +20,15 @@ export default {
   },
   async create (reminder) {
     const response = await axios.post(REMINDERS_URL, reminder)
+    // TODO better response handling
     return response.data
+  },
+  async update (reminder) {
+    const response = await axios.put(`${REMINDERS_URL}/${reminder.id}`, reminder)
+    return response.data
+  },
+  async delete (id) {
+    const response = await axios.delete(`${REMINDERS_URL}/${id}`)
+    return response.status
   }
 }
