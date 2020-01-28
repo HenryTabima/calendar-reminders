@@ -17,5 +17,9 @@ export default {
       throw new Error('wrong response from the server, please make sure you are connected')
     }
     return response.data
+  },
+  async create (reminder) {
+    const response = await axios.post(REMINDERS_URL, reminder)
+    return response.data
   }
 }

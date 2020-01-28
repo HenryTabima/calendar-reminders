@@ -12,10 +12,15 @@ import * as moment from 'moment'
 import Reminder from './Reminder.vue'
 export default {
   components: { Reminder },
-  props: ['date', 'month', 'reminders'],
+  props: ['date', 'month'],
   data () {
     return {
       outOfMonth: moment(this.month).format('MMMM') !== this.date.format('MMMM')
+    }
+  },
+  computed: {
+    reminders () {
+      return this.$store.getters['entities/reminders/filterDay'](this.date)
     }
   }
 }

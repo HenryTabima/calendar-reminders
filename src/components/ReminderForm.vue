@@ -1,5 +1,5 @@
 <template>
-  <form action="">
+  <form @submit.prevent="handleFormAction">
     <div class="modal-card show-overflow" style="width: auto">
       <header class="modal-card-head">
         <p class="modal-card-title">{{ action }} Reminder</p>
@@ -17,6 +17,15 @@
               >
               </b-input>
             </b-field>
+            <b-field label="DateTime (Read Only)">
+              <b-input
+                type="text"
+                :value="form.datetime"
+                placeholder="DateTime"
+                disabled
+              >
+              </b-input>
+            </b-field>
             <b-field label="City">
               <b-input
                 type="text"
@@ -27,10 +36,17 @@
               </b-input>
             </b-field>
             <b-field label="Color">
-              <compact-picker
-                v-model="form.color"
-              />
+              <b-input
+                type="text"
+                :value="form.color.hex"
+                placeholder="DateTime"
+                disabled
+              >
+              </b-input>
             </b-field>
+            <compact-picker
+              v-model="form.color"
+            />
           </div>
           <div class="form-layout-item">
             <b-field label="DateTime">
@@ -47,7 +63,7 @@
         <button class="button" type="button" @click="$parent.close()">
           Close
         </button>
-        <button class="button is-success">{{ action }}</button>
+        <button class="button is-success" type="submit">{{ action }}</button>
       </footer>
     </div>
   </form>
@@ -55,6 +71,7 @@
 
 <script>
 import { Compact } from 'vue-color'
+import { required, maxLength } from 'vuelidate/lib/validators'
 export default {
   components: { 'compact-picker': Compact },
   props: {
@@ -70,7 +87,30 @@ export default {
         text: '',
         city: '',
         datetime: new Date(),
-        color: '#000'
+        color: { hex: '#000' }
+      }
+    }
+  },
+  validations: {
+    form: {
+      text: {
+        required,
+        maxLength: maxLength(30)
+      },
+      city: { required },
+      datetime: { required },
+      color: { required }
+    }
+  },
+  methods: {
+    handleFormAction () {
+      this.$v.form.$touch()
+      if (!this.$v.form.$invalid) {
+        this.$store.dispatch('entities/reminders/create', this.form)
+        this.$store.commit('CLOSE_MODALS')
+      } else {
+        // TODO better handling for invalid forms
+        console.log('invalid form')
       }
     }
   }

@@ -21,9 +21,10 @@ export default {
 .reminder-item
   color whitesmoke
   padding 0 5px
-  border-radius 4px
+  border-radius 7px
   display flex
   align-items center
+  margin-bottom 1px
   .reminder-datetime
     font-size 0.6rem
     margin-right 5px

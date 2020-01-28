@@ -1,6 +1,7 @@
 import Reminder from '@/models/reminder'
 import reminderService from '@/services/reminder'
 import * as moment from 'moment'
+import uuid from 'uuid/v1'
 
 const reminderModule = {
   actions: {
@@ -9,6 +10,13 @@ const reminderModule = {
       if (reminders.length > 0) {
         Reminder.insert({ data: reminders })
       }
+    },
+    async create (store, reminder) {
+      reminder.datetime = moment(reminder.datetime).format()
+      reminder.color = reminder.color.hex
+      reminder.id = uuid()
+      await reminderService.create(reminder)
+      Reminder.insert({ data: reminder })
     }
   },
   getters: {
