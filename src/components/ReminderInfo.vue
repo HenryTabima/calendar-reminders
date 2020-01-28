@@ -4,33 +4,53 @@
       <p class="modal-card-title">{{ reminder.text }}</p>
     </header>
     <section class="modal-card-body">
-      <p>{{ reminder.city }}</p>
+      <p>{{ reminder.city }}'s weather: {{ weather }}</p>
       <b-field label="DateTime">
-              <b-datetimepicker
-                :value="new Date(reminder.datetime)"
-                icon="calendar-today"
-                inline
-                disabled
-              />
-            </b-field>
+        <b-datetimepicker
+          :value="new Date(reminder.datetime)"
+          icon="calendar-today"
+          inline
+          disabled
+        />
+      </b-field>
     </section>
-    <footer class="modal-card-foot" :style="{ 'background-color': reminder.color }">
-      <button class="button is-info" @click="handleEdit">Edit</button>
-      <button class="button is-danger" @click="handleDelete">Delete</button>
-    </footer>
+    <div :style="{ 'background-color': reminder.color }">
+      <button class="button is-info" type="button" @click="handleEdit">Edit</button>
+      <button class="button is-danger" type="button" @click="deleteReminder">Delete</button>
+    </div>
   </div>
 </template>
 
 <script>
+import { getWeatherByCityName } from '@/services/weather'
 export default {
+  data () {
+    return {
+      weather: 'loading...'
+    }
+  },
   computed: {
     reminder () {
       return this.$store.getters['entities/reminders/selected']
     }
   },
   methods: {
-    handleEdit () {},
-    handleDelete () { console.log('handleDelete') }
+    handleEdit () {
+      this.$store.commit('SHOW_EDIT_MODAL')
+    },
+    deleteReminder () {
+      const { id } = this.reminder
+      this.$store.dispatch('entities/reminders/delete', id)
+      this.$store.commit('CLOSE_MODALS')
+    }
+  },
+  async beforeMount () {
+    try {
+      const weather = await getWeatherByCityName(this.reminder.city)
+      this.weather = weather
+    } catch (err) {
+      this.weather = err
+    }
   }
 }
 </script>

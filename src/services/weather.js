@@ -15,5 +15,15 @@ export async function getTemperatureByCityName (cityName) {
   }
 }
 
+export async function getWeatherByCityName (cityName) {
+  try {
+    const response = await axios.get(`${BASE_URL}?APPID=${APP_ID}&q=${cityName}`)
+    const data = response.data
+    return data.weather[0].main
+  } catch (err) {
+    throw new Error('City not Found')
+  }
+}
+
 const kelvinToCelcius = temp => (temp - 273.15).toFixed(1)
 const kelvinToFahrenheit = temp => ((temp - 273.15) * (9 / 5) + 32).toFixed(1)
