@@ -14,14 +14,14 @@ const reminderModule = {
         Reminder.insert({ data: reminders })
       }
     },
-    async create (store, reminder) {
+    async handleCreate (store, reminder) {
       reminder.datetime = moment(reminder.datetime).format()
       reminder.color = reminder.color.hex
       reminder.id = uuid()
       await reminderService.create(reminder)
       await Reminder.insert({ data: reminder })
     },
-    async edit (store, reminder) {
+    async handleEdit (store, reminder) {
       reminder.datetime = moment(reminder.datetime).format()
       reminder.color = reminder.color.hex
       delete reminder.$id
@@ -31,7 +31,7 @@ const reminderModule = {
         data: reminder
       })
     },
-    async delete ({ commit }, id) {
+    async handleDelete ({ commit }, id) {
       await reminderService.delete(id)
       await Reminder.delete(id)
       commit('SELECT_REMINDER', null)

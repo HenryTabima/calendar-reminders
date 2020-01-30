@@ -40,7 +40,7 @@ export default {
     },
     deleteReminder () {
       const { id } = this.reminder
-      this.$store.dispatch('entities/reminders/delete', id)
+      this.$store.dispatch('entities/reminders/handleDelete', id)
       this.$store.commit('CLOSE_MODALS')
     }
   },
