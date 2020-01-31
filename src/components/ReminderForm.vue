@@ -88,7 +88,7 @@ export default {
         id: uuid(),
         text: '',
         city: '',
-        datetime: new Date(),
+        datetime: new Date(this.$store.state.selectedDate),
         color: { hex: '#000' }
       }
     }
@@ -134,10 +134,10 @@ export default {
       this.$store.commit('CLOSE_MODALS')
     },
     handleCreate () {
-      this.$store.dispatch('entities/reminders/create', this.form)
+      this.$store.dispatch('entities/reminders/handleCreate', this.form)
     },
     handleEdit () {
-      this.$store.dispatch('entities/reminders/edit', this.form)
+      this.$store.dispatch('entities/reminders/handleEdit', this.form)
     }
   }
 }

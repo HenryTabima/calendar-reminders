@@ -14,14 +14,14 @@ const reminderModule = {
         Reminder.insert({ data: reminders })
       }
     },
-    async create (store, reminder) {
+    async handleCreate (store, reminder) {
       reminder.datetime = moment(reminder.datetime).format()
       reminder.color = reminder.color.hex
       reminder.id = uuid()
       await reminderService.create(reminder)
       await Reminder.insert({ data: reminder })
     },
-    async edit (store, reminder) {
+    async handleEdit (store, reminder) {
       reminder.datetime = moment(reminder.datetime).format()
       reminder.color = reminder.color.hex
       delete reminder.$id
@@ -31,10 +31,15 @@ const reminderModule = {
         data: reminder
       })
     },
-    async delete ({ commit }, id) {
+    async handleDelete ({ commit }, id) {
       await reminderService.delete(id)
       await Reminder.delete(id)
       commit('SELECT_REMINDER', null)
+    },
+    async handleDeleteByDate ({ commit }, reminders) {
+      const deletedReminders = reminders.map(({ id }) => reminderService.delete(id))
+      await Promise.all(deletedReminders)
+      reminders.forEach(({ id }) => Reminder.delete(id))
     }
   },
   mutations: {
@@ -46,8 +51,8 @@ const reminderModule = {
     filterDay () {
       return day =>
         Reminder.query().where(reminder => {
-          const reminderDay = moment(reminder.datetime).format('MM-DD')
-          const cellDay = day.format('MM-DD')
+          const reminderDay = moment(reminder.datetime).format('YYYY-MM-DD')
+          const cellDay = day.format('YYYY-MM-DD')
           return reminderDay === cellDay
         }).orderBy('datetime')
           .get()

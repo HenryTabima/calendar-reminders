@@ -4,7 +4,15 @@
       <p class="modal-card-title">{{ reminder.text }}</p>
     </header>
     <section class="modal-card-body">
-      <p>{{ reminder.city }}'s weather: {{ weather }}</p>
+      <div>
+        <h4 class="weather-title">Weather</h4>
+        <p class="weather-content">
+          <span>{{ reminder.city }}:</span>
+          <img v-if="this.weather.icon" :src="this.weather.icon" />
+          <span>{{ this.weather.text }}
+          </span>
+        </p>
+      </div>
       <b-field label="DateTime">
         <b-datetimepicker
           :value="new Date(reminder.datetime)"
@@ -14,19 +22,22 @@
         />
       </b-field>
     </section>
-    <div :style="{ 'background-color': reminder.color }">
+    <footer class="modal-card-foot" :style="{ 'background-color': reminder.color }">
       <button class="button is-info" type="button" @click="handleEdit">Edit</button>
       <button class="button is-danger" type="button" @click="deleteReminder">Delete</button>
-    </div>
+    </footer>
   </div>
 </template>
 
 <script>
-import { getWeatherByCityName } from '@/services/weather'
+import { getWeatherByCityAndDate } from '@/services/weather'
 export default {
   data () {
     return {
-      weather: 'loading...'
+      weather: {
+        text: 'loading...',
+        icon: null
+      }
     }
   },
   computed: {
@@ -40,16 +51,25 @@ export default {
     },
     deleteReminder () {
       const { id } = this.reminder
-      this.$store.dispatch('entities/reminders/delete', id)
-      this.$store.commit('CLOSE_MODALS')
+      this.$buefy.dialog.confirm({
+        title: 'Deleting reminder',
+        message: 'Are you sure you want to <b>delete</b> your reminder? This action cannot be undone.',
+        confirmText: 'Delete reminder',
+        type: 'is-danger',
+        hasIcon: true,
+        onConfirm: () => {
+          this.$store.dispatch('entities/reminders/handleDelete', id)
+          this.$store.commit('CLOSE_MODALS')
+        }
+      })
     }
   },
   async beforeMount () {
     try {
-      const weather = await getWeatherByCityName(this.reminder.city)
+      const weather = await getWeatherByCityAndDate(this.reminder.city, this.reminder.datetime)
       this.weather = weather
     } catch (err) {
-      this.weather = err
+      this.weather.text = err
     }
   }
 }
@@ -60,4 +80,10 @@ export default {
   .modal-card-title
     text-align center
     color whitesmoke !important
+  .weather-title
+    font-weight bold
+  .weather-content
+    display flex
+    justify-content space-between
+    align-items center
 </style>

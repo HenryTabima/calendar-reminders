@@ -33,5 +33,6 @@ export default {
   width 100%
   display flex
   justify-content space-between
+  padding 0 20px
   align-items center
 </style>
