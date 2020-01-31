@@ -1,5 +1,5 @@
 <template>
-  <div class="calendar-cell" @click="handleCellClick">
+  <div class="calendar-cell" @click="handleCellClick" :style="{ cursor: this.outOfMonth ? 'auto' : 'pointer' }">
     <header class="cell-header">
       <div :class="{'out-of-month': outOfMonth, 'cell-day': true}">{{ date.format('DD') }}</div>
       <div class="cell-actions" v-if="!outOfMonth">
@@ -32,6 +32,7 @@ export default {
   },
   methods: {
     handleCellClick () {
+      if (this.outOfMonth) return
       this.$store.commit('SET_SELECTED_DATE', new Date(this.date.format()))
       this.$store.commit('SHOW_CREATE_MODAL')
     },
@@ -51,7 +52,6 @@ export default {
 
 <style lang="stylus">
 .calendar-cell
-  cursor pointer
   display flex
   flex-direction column
   border: 1px solid #969696
