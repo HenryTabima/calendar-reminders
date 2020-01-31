@@ -14,10 +14,10 @@
         />
       </b-field>
     </section>
-    <div :style="{ 'background-color': reminder.color }">
+    <footer class="modal-card-foot" :style="{ 'background-color': reminder.color }">
       <button class="button is-info" type="button" @click="handleEdit">Edit</button>
       <button class="button is-danger" type="button" @click="deleteReminder">Delete</button>
-    </div>
+    </footer>
   </div>
 </template>
 

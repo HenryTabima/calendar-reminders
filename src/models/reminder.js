@@ -14,10 +14,6 @@ class Reminder extends Model {
       color: this.attr('')
     }
   }
-
-  static fetch () {
-    
-  }
 }
 
 export default Reminder
