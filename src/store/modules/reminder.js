@@ -35,6 +35,11 @@ const reminderModule = {
       await reminderService.delete(id)
       await Reminder.delete(id)
       commit('SELECT_REMINDER', null)
+    },
+    async handleDeleteByDate ({ commit }, reminders) {
+      const deletedReminders = reminders.map(({ id }) => reminderService.delete(id))
+      await Promise.all(deletedReminders)
+      reminders.forEach(({ id }) => Reminder.delete(id))
     }
   },
   mutations: {

@@ -1,5 +1,5 @@
 <template>
-  <div class="reminder-item" :style="{ 'background-color': data.color }" @click="handleClick">
+  <div class="reminder-item" :style="{ 'background-color': data.color }" @click.stop="handleClick">
    <span class="reminder-datetime">{{ getTime(data.datetime) }}</span>
    <div class="reminder-tes">{{ data.text }}</div>
   </div>

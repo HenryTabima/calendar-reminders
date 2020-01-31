@@ -88,7 +88,7 @@ export default {
         id: uuid(),
         text: '',
         city: '',
-        datetime: new Date(),
+        datetime: new Date(this.$store.state.selectedDate),
         color: { hex: '#000' }
       }
     }

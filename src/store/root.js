@@ -2,7 +2,8 @@ export default {
   state: {
     isCreateFormActive: false,
     isEditFormActive: false,
-    isReminderInfoActive: false
+    isReminderInfoActive: false,
+    selectedDate: new Date()
   },
   mutations: {
     SHOW_CREATE_MODAL (state) {
@@ -24,6 +25,9 @@ export default {
       state.isCreateFormActive = false
       state.isEditFormActive = false
       state.isReminderInfoActive = false
+    },
+    SET_SELECTED_DATE (state, newDate) {
+      state.selectedDate = newDate
     }
   }
 }
