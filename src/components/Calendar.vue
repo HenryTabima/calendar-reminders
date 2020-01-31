@@ -8,7 +8,7 @@
       <div v-for="week in calendar" :key="week[0].week()" class="calendar-week">
         <calendar-cell
           v-for="day in week"
-          :key="`${monthName}-${day.format('DD-MM')}`"
+          :key="`${monthName}-${day.format('DD-MM-YYYY')}`"
           :date="day"
           :month="monthDate"
         />
@@ -36,7 +36,6 @@ export default {
       return moment(this.monthDate).format('MMMM').toUpperCase()
     },
     calendar () {
-      // TODO Bug detected for november of 2019
       let startWeek = moment(this.monthDate).startOf('month').week()
       let endWeek = moment(this.monthDate).endOf('month').week()
       // managin edge case for December where the last week is also the number 1
@@ -44,7 +43,7 @@ export default {
       let calendar = []
       for (let week = startWeek; week <= endWeek; week++) {
         calendar.push(Array(7).fill(null).map((_, dayIndex) =>
-          moment().week(week).startOf('week').clone().add(dayIndex, 'day')
+          moment(this.monthDate).week(week).startOf('week').clone().add(dayIndex, 'day')
         ))
       }
       return calendar

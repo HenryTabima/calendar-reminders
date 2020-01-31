@@ -46,8 +46,8 @@ const reminderModule = {
     filterDay () {
       return day =>
         Reminder.query().where(reminder => {
-          const reminderDay = moment(reminder.datetime).format('MM-DD')
-          const cellDay = day.format('MM-DD')
+          const reminderDay = moment(reminder.datetime).format('YYYY-MM-DD')
+          const cellDay = day.format('YYYY-MM-DD')
           return reminderDay === cellDay
         }).orderBy('datetime')
           .get()
