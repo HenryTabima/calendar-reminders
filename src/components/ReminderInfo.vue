@@ -66,7 +66,7 @@ export default {
   },
   async beforeMount () {
     try {
-      const weather = await getWeatherByCityAndDate(this.reminder.city, this.reminder.date)
+      const weather = await getWeatherByCityAndDate(this.reminder.city, this.reminder.datetime)
       this.weather = weather
     } catch (err) {
       this.weather.text = err
