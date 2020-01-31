@@ -4,7 +4,15 @@
       <p class="modal-card-title">{{ reminder.text }}</p>
     </header>
     <section class="modal-card-body">
-      <p>{{ reminder.city }}'s weather: {{ weather }}</p>
+      <div>
+        <h4 class="weather-title">Weather</h4>
+        <p class="weather-content">
+          <span>{{ reminder.city }}:</span>
+          <img v-if="this.weather.icon" :src="this.weather.icon" />
+          <span>{{ this.weather.text }}
+          </span>
+        </p>
+      </div>
       <b-field label="DateTime">
         <b-datetimepicker
           :value="new Date(reminder.datetime)"
@@ -22,11 +30,14 @@
 </template>
 
 <script>
-import { getWeatherByCityName } from '@/services/weather'
+import { getWeatherByCityAndDate } from '@/services/weather'
 export default {
   data () {
     return {
-      weather: 'loading...'
+      weather: {
+        text: 'loading...',
+        icon: null
+      }
     }
   },
   computed: {
@@ -55,10 +66,10 @@ export default {
   },
   async beforeMount () {
     try {
-      const weather = await getWeatherByCityName(this.reminder.city)
+      const weather = await getWeatherByCityAndDate(this.reminder.city, this.reminder.date)
       this.weather = weather
     } catch (err) {
-      this.weather = err
+      this.weather.text = err
     }
   }
 }
@@ -69,4 +80,10 @@ export default {
   .modal-card-title
     text-align center
     color whitesmoke !important
+  .weather-title
+    font-weight bold
+  .weather-content
+    display flex
+    justify-content space-between
+    align-items center
 </style>

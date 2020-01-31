@@ -4,6 +4,8 @@ const BASE_URL = 'https://api.openweathermap.org/data/2.5/weather'
 // The best practice is to get the APP_ID form a non tracked file
 const APP_ID = '1e1a64ed3720bb82545e1d5db123772b'
 
+const WEATHER_ICON_URL = 'http://openweathermap.org/img/wn/'
+
 export async function getTemperatureByCityName (cityName) {
   const response = await axios.get(`${BASE_URL}?APPID=${APP_ID}&q=${cityName}`)
   const data = response.data
@@ -15,11 +17,14 @@ export async function getTemperatureByCityName (cityName) {
   }
 }
 
-export async function getWeatherByCityName (cityName) {
+export async function getWeatherByCityAndDate (cityName, date) {
   try {
     const response = await axios.get(`${BASE_URL}?APPID=${APP_ID}&q=${cityName}`)
     const data = response.data
-    return data.weather[0].main
+    return {
+      text: data.weather[0].description,
+      icon: `${WEATHER_ICON_URL}${data.weather[0].icon}.png`
+    }
   } catch (err) {
     throw new Error('City not Found')
   }
