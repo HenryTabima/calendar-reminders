@@ -3,7 +3,7 @@
     <header class="calendar-title">{{ monthName }}</header>
     <div class="grid-container">
       <div class="calendar-header">
-        <div v-for="dayOfWeek in weekDays" :key="dayOfWeek">{{ dayOfWeek }}</div>
+        <div class="weekday" v-for="dayOfWeek in weekDays" :key="dayOfWeek">{{ dayOfWeek }}</div>
       </div>
       <div v-for="week in calendar" :key="week[0].week()" class="calendar-week">
         <calendar-cell
@@ -61,18 +61,22 @@ export default {
 .calendar-title
   text-align center
   font-size 2rem
-  margin-top -2.5rem
   margin-bottom 0.5rem
   font-weight bold
   color #2F74B5
-.calendar-header>div
-  display inline-block
-  width 13vw
-  text-align center
-  background-color #2F74B5
-  color whitesmoke
-  font-weight bold
-  padding 3px
+.calendar-header
+  height 30px
+  &>div
+    display inline-block
+    width 13vw
+    text-align center
+    background-color #2F74B5
+    color whitesmoke
+    font-weight bold
+    padding 3px
+    white-space nowrap;
+    overflow hidden;
+    text-overflow ellipsis;
 .calendar-week
   display flex
 </style>
