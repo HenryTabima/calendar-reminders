@@ -40,8 +40,17 @@ export default {
     },
     deleteReminder () {
       const { id } = this.reminder
-      this.$store.dispatch('entities/reminders/handleDelete', id)
-      this.$store.commit('CLOSE_MODALS')
+      this.$buefy.dialog.confirm({
+        title: 'Deleting reminder',
+        message: 'Are you sure you want to <b>delete</b> your reminder? This action cannot be undone.',
+        confirmText: 'Delete reminder',
+        type: 'is-danger',
+        hasIcon: true,
+        onConfirm: () => {
+          this.$store.dispatch('entities/reminders/handleDelete', id)
+          this.$store.commit('CLOSE_MODALS')
+        }
+      })
     }
   },
   async beforeMount () {
