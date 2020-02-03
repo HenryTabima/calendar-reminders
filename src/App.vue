@@ -4,6 +4,7 @@
     <div class="container">
       <router-view/>
     </div>
+    <b-loading :is-full-page="true" :active="$store.state.isLoading" />
   </div>
 </template>
 

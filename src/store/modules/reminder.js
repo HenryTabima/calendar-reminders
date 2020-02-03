@@ -8,20 +8,25 @@ const reminderModule = {
     selectedID: null
   },
   actions: {
-    async fetchAll () {
+    async fetchAll ({ commit }) {
+      commit('START_LOADING', null, { root: true })
       const reminders = await reminderService.getAll()
       if (reminders.length > 0) {
         Reminder.insert({ data: reminders })
       }
+      commit('STOP_LOADING', null, { root: true })
     },
-    async handleCreate (store, reminder) {
+    async handleCreate ({ commit }, reminder) {
+      commit('START_LOADING', null, { root: true })
       reminder.datetime = moment(reminder.datetime).format()
       reminder.color = reminder.color.hex
       reminder.id = uuid()
       await reminderService.create(reminder)
       await Reminder.insert({ data: reminder })
+      commit('STOP_LOADING', null, { root: true })
     },
-    async handleEdit (store, reminder) {
+    async handleEdit ({ commit }, reminder) {
+      commit('START_LOADING', null, { root: true })
       reminder.datetime = moment(reminder.datetime).format()
       reminder.color = reminder.color.hex
       delete reminder.$id
@@ -30,16 +35,23 @@ const reminderModule = {
         where: reminder.id,
         data: reminder
       })
+      commit('STOP_LOADING', null, { root: true })
     },
     async handleDelete ({ commit }, id) {
+      commit('START_LOADING', null, { root: true })
       await reminderService.delete(id)
       await Reminder.delete(id)
       commit('SELECT_REMINDER', null)
+      commit('STOP_LOADING', null, { root: true })
     },
     async handleDeleteByDate ({ commit }, reminders) {
+      commit('START_LOADING', null, { root: true })
       const deletedReminders = reminders.map(({ id }) => reminderService.delete(id))
       await Promise.all(deletedReminders)
-      reminders.forEach(({ id }) => Reminder.delete(id))
+      await Promise.all(
+        reminders.map(({ id }) => Reminder.delete(id))
+      )
+      commit('STOP_LOADING', null, { root: true })
     }
   },
   mutations: {

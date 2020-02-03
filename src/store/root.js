@@ -3,7 +3,8 @@ export default {
     isCreateFormActive: false,
     isEditFormActive: false,
     isReminderInfoActive: false,
-    selectedDate: new Date()
+    selectedDate: new Date(),
+    isLoading: false
   },
   mutations: {
     SHOW_CREATE_MODAL (state) {
@@ -28,6 +29,12 @@ export default {
     },
     SET_SELECTED_DATE (state, newDate) {
       state.selectedDate = newDate
+    },
+    START_LOADING (state) {
+      state.isLoading = true
+    },
+    STOP_LOADING (state) {
+      state.isLoading = false
     }
   }
 }
