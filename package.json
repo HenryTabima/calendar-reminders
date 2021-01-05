@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@vuex-orm/core": "^0.34.1",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "buefy": "^0.8.10",
     "core-js": "^3.4.4",
     "moment": "^2.24.0",
